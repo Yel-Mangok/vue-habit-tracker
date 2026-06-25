@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 
 const emit = defineEmits("create");
 
-const from = reactive(
+const form = reactive(
     {
         name: "",
         category: "Health",
@@ -12,22 +12,22 @@ const from = reactive(
 );
 
 const submitHabit = () => {
-    if (!from.name.trim()){
+    if (!form.name.trim()){
         return;
     }
 
-    emit("create", {...from, completed: false});
+    emit("create", {...form, completed: false});
 
-    from.name = "";
+    form.name = "";
 };
 
 </script>
 
 <template>
-    <form class="habit-force" @submit-prevent = "submitHabit">
+    <form class="habit-form" @submit.prevent = "submitHabit">
       <input v-model="form.name" placeholder="Habit Name">
       
-      <select v-model="">
+      <select v-model="form.category">
 
         <option>Health</option>
         <option>Learning</option>
@@ -40,6 +40,7 @@ const submitHabit = () => {
         <option>Medium</option>
         <option>Low</option>
       </select>
+      
 
       <button>Add Habit</button>
       

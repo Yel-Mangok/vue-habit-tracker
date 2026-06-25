@@ -5,6 +5,7 @@ import { ref, computed, watch } from "vue";
 import HabitCard from "../components/HabitCard.vue";
 import HabitForm from "../components/HabitForm.vue";
 import StatsCard from "../components/StatsCard.vue";
+import "../styles/HabitView.css";
 
 // Define the variable reference (data type)
 const habits = ref(
@@ -61,12 +62,12 @@ watch(habits, () => { console.log("habits updated"); }, { deep: true });
 
         </section>
 
-        <HabitForm @creae="addHabit" />
+        <HabitForm @create="addHabit" />
 
         <section class="habits-grid">
             <HabitCard
                  v-for="habit in habits"
-                 :key="habit-id"
+                 :key="habit.id"
                  :habit="habit"
                  @toggle="toggleHabit"
             />

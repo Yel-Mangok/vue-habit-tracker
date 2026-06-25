@@ -1,4 +1,4 @@
-<script>
+<script setup>
 defineProps(
     {
         habit: Object
