@@ -1,0 +1,49 @@
+.ring-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+/* SVG text: rate percentage */
+.ring-text-rate {
+    fill: white;
+    font-size: 32px;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    letter-spacing: -1px;
+}
+
+/* SVG text: "completion" label */
+.ring-text-label {
+    fill: #64748b;
+    font-size: 13px;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Animated progress arc */
+.progress-ring {
+    transition: stroke-dashoffset 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Summary line below the ring */
+.ring-summary {
+    color: #64748b;
+    font-size: 0.88rem;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.ring-completed {
+    color: #2563eb;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.ring-total {
+    color: white;
+    font-weight: 600;
+}
