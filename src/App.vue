@@ -1,8 +1,10 @@
 <script setup>
-// Import the page
-import HabitView from './pages/HabitView.vue';
+// Import the application navigation banner
+import Navbar from "./components/Navbar.vue";
+
 </script>
 
 <template>
-    <HabitView />
+    <Navbar />
+    <RouterView />
 </template>
