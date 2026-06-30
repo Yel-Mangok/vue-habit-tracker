@@ -1,77 +1,55 @@
 <script setup>
 // Import the Vue,js function to manage the page
-import { ref, computed, watch } from "vue";
+import { watch } from "vue";
 // Import the page components
 import HabitCard from "../components/HabitCard.vue";
 import HabitForm from "../components/HabitForm.vue";
 import StatsCard from "../components/StatsCard.vue";
-import "../styles/HabitView.css";
+// Import the shared composable
+import useHabits from "../composable/useHabits.js";
+// Import the page CSS styles
+import "../styles/pages/HabitView.css";
 
-// Define the variable reference (data type)
-const habits = ref(
-    [
-        {
-            id: 1,
-            name: "Morning Run",
-            category: "Fitness",
-            priority: "High",
-            completed: true
-        },
-        {
-            id: 2,
-            name: "Read Book",
-            category: "Learning",
-            priority: "Medium",
-            completed: false
-        }
-    ]
-);
+// Destructure everything needed from the shared composable
+const { habits, total, completed, pending, addHabit, toggleHabit } = useHabits();
 
-const addHabit = (habit) => {
-    habits.value.push({...habit, id: Date.now()});
-};
-
-const toggleHabit = (id) => {
-    const habit = habits.value.find(item => item.id === id);
-
-    habit.completed = !habit.completed;
-};
-
-const total = computed(() => habits.value.length);
-
-const completed = computed(() => habits.value.filter(h => h.completed).length);
-
-const pending = computed(() => total.value - completed.value);
-
+// Watch for habit changes (deep)
 watch(habits, () => { console.log("habits updated"); }, { deep: true });
 
 </script>
 
 <template>
-    <div class="container">
-        <header class = "hero">
-            <h1>Smart Habit Tracker</h1>
-            <p>Build better habits every day</p>
-        </header>
 
-        <section class="stats-grid">
+<div class="container">
 
-            <StatsCard title="Total" :value="total" />
-            <StatsCard title="Completed" :value="completed" />
-            <StatsCard title="Pending" :value="pending" />
+    <header class="hero">
 
-        </section>
+        <h1>Smart Habit Tracker</h1>
 
-        <HabitForm @create="addHabit" />
+        <p>Build better habits every day</p>
 
-        <section class="habits-grid">
-            <HabitCard
-                 v-for="habit in habits"
-                 :key="habit.id"
-                 :habit="habit"
-                 @toggle="toggleHabit"
-            />
-        </section>
+    </header>
 
-    </div>
+    <section class="stats-grid">
+
+        <StatsCard title="Total"     :value="total" />
+        <StatsCard title="Completed" :value="completed" />
+        <StatsCard title="Pending"   :value="pending" />
+
+    </section>
+
+    <HabitForm @create="addHabit" />
+
+    <section class="habits-grid">
+
+        <HabitCard 
+            v-for="habit in habits"
+            :key="habit.id"
+            :habit="habit"
+            @toggle="toggleHabit"
+        />
+
+    </section>
+</div>
+
 </template>
